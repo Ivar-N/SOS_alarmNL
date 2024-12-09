@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\TblGebruiker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoretblGebruikerRequest;
+use App\Http\Requests\UpdatetblGebruikerRequest;
+
 
 class AuthController extends Controller
 {
