@@ -4,25 +4,44 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
-
-class TblGebruiker extends Model
+class TblGebruiker extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'tbl_gebruiker'; // Specify the table name if necessary
+    protected $table = 'tbl_gebruiker';
 
-    protected $fillable = ['AdresID', 'Naam', 'Achternaam', 'Wachtwoord', 'Telefoonnummer']; // Mass-assignable columns
+    // Define mass-assignable fields
+    protected $fillable = [
+        'AdresID', 
+        'Naam', 
+        'Achternaam', 
+        'Wachtwoord', 
+        'Telefoonnummer'
+    ];
 
-    // Define the relationship with the TblAdres model
-    public function adres()
+    // Hide sensitive fields from API responses
+    protected $hidden = [
+        'Wachtwoord', 
+        'remember_token',
+    ];
+
+    // Accessor to use 'Wachtwoord' as the password field for authentication
+    public function getAuthPassword()
     {
-        return $this->belongsTo(TblAdres::class, 'AdresID'); // A user belongs to one address (Adres)
+        return $this->Wachtwoord;
     }
 
-    // You can also add mutators for password hashing
+    // Define the relationship with TblAdres (a user belongs to one address)
+    public function adres()
+    {
+        return $this->belongsTo(TblAdres::class, 'AdresID'); // Foreign key is AdresID
+    }
+
+    // Automatically hash passwords before saving to the database
     public function setWachtwoordAttribute($value)
     {
-        $this->attributes['Wachtwoord'] = bcrypt($value); // Hash password before saving
+        $this->attributes['Wachtwoord'] = bcrypt($value);
     }
 }
