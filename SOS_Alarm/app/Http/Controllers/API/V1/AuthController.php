@@ -14,20 +14,31 @@ class AuthController extends Controller
     // User Registration
     public function register(Request $request)
     {
+    // Validate user and address inputs
         $request->validate([
             'Naam' => 'required|string|max:255',
             'Achternaam' => 'required|string|max:255',
             'Telefoonnummer' => 'required|string|max:15|unique:tbl_gebruiker,Telefoonnummer',
             'Wachtwoord' => 'required|string|min:8|confirmed',
-            'AdresID' => 'nullable|integer|exists:tbl_adres,id',
+            'StrNaamHuisnummer' => 'required|string|max:255', // Address fields
+            'Postcode' => 'required|string|max:10',
+            'StadID' => 'required|integer|exists:tbl_stad,id',
         ]);
 
+        // Create the address in TblAdres
+        $address = TblAdres::create([
+            'StrNaamHuisnummer' => $request->StrNaamHuisnummer,
+            'Postcode' => $request->Postcode,
+            'StadID' => $request->StadID,
+        ]);
+
+        // Create the user in TblGebruiker with the generated AdresID
         $user = TblGebruiker::create([
             'Naam' => $request->Naam,
             'Achternaam' => $request->Achternaam,
             'Telefoonnummer' => $request->Telefoonnummer,
-            'Wachtwoord' => $request->Wachtwoord, // Password is hashed by the model's mutator
-            'AdresID' => $request->AdresID,
+            'Wachtwoord' => $request->Wachtwoord,
+            'AdresID' => $address->id,
         ]);
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
