@@ -45,7 +45,7 @@ return [
             'driver' => 'sanctum',
             'provider' => 'gebruikers',
         ],
-    ]
+    ], // <-- Added this comma to close the guards section properly
 
     /*
     |--------------------------------------------------------------------------
