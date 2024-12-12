@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoretblGebruikerRequest;
 use App\Http\Requests\UpdatetblGebruikerRequest;
 
-class UserProfileController extends Controller
+class GebruikerController extends Controller
 {
     // 1. Show the profile of the authenticated user
     public function show(Request $request)
