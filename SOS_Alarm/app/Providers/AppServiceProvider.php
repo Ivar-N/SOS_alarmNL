@@ -9,10 +9,13 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
+    public function register()
     {
-        //
+        $this->app->singleton(\App\Services\SIAEncoder::class, function () {
+            return new \App\Services\SIAEncoder();
+        });
     }
+
 
     /**
      * Bootstrap any application services.
