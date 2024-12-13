@@ -12,14 +12,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_stads', function (Blueprint $table) {
-            $table->id('StadID'); // Primary key with custom name 'StadID'
-            $table->foreignId('LandID')  // Foreign key to tbl_land table
-                  ->constrained('tbl_land')  // Ensures the foreign key points to tbl_land
-                  ->onDelete('cascade');  // Deletes cities if the corresponding country is deleted
+            $table->id('StadID'); // Primary key
+            $table->foreignId('LandID')
+                  ->constrained('tbl_lands', 'LandID') // Ensure the table name matches tbl_lands
+                  ->onDelete('cascade');
             $table->string('StadNaam'); // Column for city name
-            $table->timestamps(); // To add 'created_at' and 'updated_at' timestamps
-
-            $table->foreign('landID')->references('landID')->on('tbl_land')->onDelete('cascade');
+            $table->timestamps(); // Adds timestamps
         });
     }
 

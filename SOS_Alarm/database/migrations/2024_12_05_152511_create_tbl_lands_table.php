@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_lands', function (Blueprint $table) {
-            $table->id('landid'); // Primair ID
-            $table->string('landnaam'); // Landnaam als string
-            $table->timestamps();
+            $table->id('LandID'); // Primary key with consistent casing
+            $table->string('LandNaam'); // Column for country name
+            $table->timestamps(); // Adds timestamps
         });
     }
 

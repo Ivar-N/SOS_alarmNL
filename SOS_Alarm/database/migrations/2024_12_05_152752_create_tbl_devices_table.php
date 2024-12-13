@@ -12,19 +12,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_devices', function (Blueprint $table) {
-            $table->id('DeviceID'); // Primary key with custom name 'DeviceID'
-            $table->foreignId('GebruikerID') // Foreign key to tbl_gebruiker table
-                  ->constrained('tbl_gebruiker') // Ensures the foreign key points to tbl_gebruiker
-                  ->onDelete('cascade'); // Deletes devices if the corresponding user is deleted
-            $table->string('AlarmCode'); // Column for alarm code
-            $table->decimal('longitude', 10, 7); // Column for longitude (with precision for coordinates)
-            $table->decimal('latitude', 10, 7); // Column for latitude (with precision for coordinates)
-            $table->string('mapslink'); // Column for the maps link
-            $table->string('TelefoonnummerDevice'); // Column for device phone number
-            $table->integer('Batterijpercentage'); // Column for battery percentage
-            $table->timestamps(); // Adds 'created_at' and 'updated_at' timestamps
-
-            $table->foreign('gebruikerID')->references('gebruikerID')->on('tbl_gebruiker')->onDelete('cascade');
+            $table->id('DeviceID'); // Primary key
+            $table->foreignId('GebruikerID')
+                  ->constrained('tbl_gebruikers', 'GebruikerID') // Ensure the table name matches tbl_gebruikers
+                  ->onDelete('cascade');
+            $table->string('AlarmCode'); // Alarm code
+            $table->decimal('Longitude', 10, 7); // Longitude
+            $table->decimal('Latitude', 10, 7); // Latitude
+            $table->string('MapsLink'); // Maps link
+            $table->string('TelefoonnummerDevice'); // Device phone number
+            $table->integer('BatterijPercentage'); // Battery percentage
+            $table->timestamps(); // Adds timestamps
         });
     }
 
