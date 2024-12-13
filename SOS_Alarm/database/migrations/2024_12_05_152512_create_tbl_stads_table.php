@@ -18,6 +18,8 @@ return new class extends Migration
                   ->onDelete('cascade');  // Deletes cities if the corresponding country is deleted
             $table->string('StadNaam'); // Column for city name
             $table->timestamps(); // To add 'created_at' and 'updated_at' timestamps
+
+            $table->foreign('landID')->references('landID')->on('tbl_land')->onDelete('cascade');
         });
     }
 

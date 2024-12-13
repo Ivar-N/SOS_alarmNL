@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('TelefoonnummerDevice'); // Column for device phone number
             $table->integer('Batterijpercentage'); // Column for battery percentage
             $table->timestamps(); // Adds 'created_at' and 'updated_at' timestamps
+
+            $table->foreign('gebruikerID')->references('gebruikerID')->on('tbl_gebruiker')->onDelete('cascade');
         });
     }
 

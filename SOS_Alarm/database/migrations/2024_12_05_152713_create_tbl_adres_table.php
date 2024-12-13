@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_adres', function (Blueprint $table) {
-            $table->id();
+            $table->id('adresID'); // Primaire sleutel
+            $table->unsignedBigInteger('stadID'); // Buitenlandse sleutel naar tblStad
+            $table->string('straatnaam'); // Straatnaam
+            $table->string('huisnummer'); // Huisnummer
+            $table->string('postcode'); // Postcode
             $table->timestamps();
+
+            // Buitenlandse sleutelrelatie met tblStad
+            $table->foreign('stadID')->references('stadID')->on('tbl_stad')->onDelete('cascade');
         });
     }
 

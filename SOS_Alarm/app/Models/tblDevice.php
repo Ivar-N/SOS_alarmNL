@@ -11,6 +11,8 @@ class TblDevice extends Model
 
     protected $table = 'tbl_device'; // Table name
 
+    protected $primaryKey = 'DeviceID'; // Primary key
+
     // Mass-assignable attributes
     protected $fillable = [
         'GebruikerID',

@@ -11,6 +11,9 @@ class TblAdres extends Model
 
     protected $table = 'tbl_adres'; // Specify the table name if necessary
 
+    protected $primaryKey = 'adresID'; // Specify the primary key if necessary
+
+    // Define the mass-assignable columns
     protected $fillable = ['StadID', 'straatnaam', 'huisnummer', 'postcode']; // Mass-assignable columns
 
     // Define the relationship with the TblStad model

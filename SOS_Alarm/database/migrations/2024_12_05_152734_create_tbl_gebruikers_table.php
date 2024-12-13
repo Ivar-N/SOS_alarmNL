@@ -18,9 +18,12 @@ return new class extends Migration
                   ->onDelete('cascade'); // Deletes users if the corresponding address is deleted
             $table->string('Naam'); // User's first name
             $table->string('Achternaam'); // User's last name
+            $table->string('Email'); // User's email
             $table->string('Wachtwoord'); // User's password (make sure to hash it)
             $table->string('Telefoonnummer'); // User's phone number
             $table->timestamps(); // Adds 'created_at' and 'updated_at' timestamps
+
+            $table->foreign('adresID')->references('adresID')->on('tbl_adres')->onDelete('cascade');
         });
     }
 

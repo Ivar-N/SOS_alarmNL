@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\AuthController;
 use App\Http\Controllers\API\V1\DeviceController;
 use App\Http\Controllers\API\V1\GebruikerController;
+use App\Http\Controllers\API\V1\DeviceEventController;
 
+
+Route::middleware('auth:sanctum')->post('/send-event', [DeviceEventController::class, 'sendEvent']);
 
 // Authentication routes
 Route::prefix('v1')->group(function () {

@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens; 
+use Illuminate\Foundation\Auth\User as Authenticatable; 
+use Illuminate\Notifications\Notifiable; 
 
 class TblGebruiker extends Authenticatable
 {
@@ -12,11 +14,14 @@ class TblGebruiker extends Authenticatable
 
     protected $table = 'tbl_gebruiker';
 
+    protected $primaryKey = 'GebruikerID';
+
     // Define mass-assignable fields
     protected $fillable = [
         'AdresID', 
         'Naam', 
         'Achternaam', 
+        'Email',
         'Wachtwoord', 
         'Telefoonnummer'
     ];

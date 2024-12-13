@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_lands', function (Blueprint $table) {
-            $table->id();
+            $table->id('landid'); // Primair ID
+            $table->string('landnaam'); // Landnaam als string
             $table->timestamps();
         });
     }
